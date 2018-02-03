@@ -9,14 +9,14 @@ import datetime
 boards = []
 Nextboards = []
 
-fname = 'Data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
+fname = './../data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
 h5f = h5py.File(fname, 'w')
 dsI = h5f.create_dataset("input_boards", (832,0), maxshape=(832,None), dtype='f', chunks=(832,1000))
 dsO = h5f.create_dataset("output_boards", (832,0), maxshape=(832,None), dtype='f', chunks=(832,1000))
 h5f.close()
 
 N = 0
-while N < 1000:
+while N < 2000:
     board = chess.Board()
 
     i = 0
@@ -75,7 +75,7 @@ while N < 1000:
 #h5f = h5py.File('boards.h5', 'w')
 #h5f.create_dataset('input_boards', data=boards)
 #h5f.create_dataset('output_boards', data=Nextboards)
-h5f.close()
+#h5f.close()
 
 '''
 np.savetxt('test.txt', boards , delimiter=",", newline="\n", fmt ="%d")

@@ -4,7 +4,7 @@ import numpy as np
 
 PossibleEntries = '.prnbqkPRNBQK'
 
-def Board2Vector(Board):
+def board2vector(Board):
     board_asString0 = str(Board)
     board_asString = board_asString0.replace(" ", "")
     board_asString = board_asString.replace('\n', "")
@@ -15,7 +15,7 @@ def Board2Vector(Board):
             board_asvector[b*13+it] = int(piece is PossibleEntries[it])
     return board_asvector
 
-def Vector2String(Vector):
+def vector2string(Vector):
     board_asString2 = ''
     for it in range(0,len(Vector),len(PossibleEntries)):
         board_asString2 += PossibleEntries[int(np.where(Vector[it:it + 13])[0])]
@@ -32,13 +32,13 @@ if __name__ is '__main__':
     start = time.time()
     number = 10000
     for i in range(number):
-        Vector = Board2Vector(Board)
+        Vector = board2vector(Board)
     end = time.time()
     print('Took me {} ms per board'.format((end-start)/number*1e3))
 
     start = time.time()
     for i in range(number):
-        String = Vector2String(Vector)
+        String = vector2string(Vector)
     end = time.time()
     print('Took me {} ms per board'.format((end-start)/number*1e3))
 

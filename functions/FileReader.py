@@ -33,9 +33,9 @@ __version__ = '0.1'
 
 import h5py
 import numpy as np
-from vectorizer import Vector2String
+from vectorizer import vector2string
 
-def ReadData(fname):
+def readdata(fname):
     h5f = h5py.File(fname, 'r')
     dsetIn = h5f["input_boards"]
     dsetOut = h5f["output_boards"]
@@ -45,12 +45,12 @@ def ReadData(fname):
 
 
 if __name__ is '__main__':
-    fname = 'Data/20180204T0000boards.h5'
-    X,Y = ReadData(fname)
+    fname = './../data/20180204T0021boards.h5'
+    X,Y = readdata(fname)
     print(X.shape)
     print(Y.shape)
-    for i in range(X.shape[0]):
-        print(' ')
-        print(' ')
-        print(Vector2String(X[i]))
+#    for i in range(X.shape[0]):
+#        print(' ')
+#        print(' ')
+#        print(Vector2String(X[i]))
 
