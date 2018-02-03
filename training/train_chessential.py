@@ -6,12 +6,16 @@ from file_reader import *
 
 # Generate dummy data
 import numpy as np
+
+
 x_train = np.random.random((3, 20))
 y_train = keras.utils.to_categorical(np.random.randint(10, size=(3, 1)), num_classes=10)
 y_train = [[ 1,  0,  1,  0,  1,  0,  1,  1,  0,  0],[ 1,  0,  1,  0,  0,  0,  0,  0,  0,  0],[ 0,  1,  0,  0,  1,  0,  1,  1,  0,  1]]
 x_test = np.random.random((3, 20))
 y_test = keras.utils.to_categorical(np.random.randint(10, size=(3, 1)), num_classes=10)
 y_test = [[ 1,  0,  1,  0,  0,  0,  0,  0,  0,  0],[ 0,  0,  1,  0,  0,  1,  0,  0,  0,  0],[ 0,  1,  0,  0,  0,  0,  0,  0,  0,  0]]
+
+ReadData()
 
 print(y_test)
 model = Sequential()
@@ -33,7 +37,7 @@ model.fit(x_train, y_train,
           epochs=20,
           batch_size=128)
 score = model.evaluate(x_test, y_test, batch_size=128)
-
+'''
 # serialize model to JSON
 model_json = model.to_json()
 with open("model.json", "w") as json_file:
@@ -53,7 +57,7 @@ loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
 loaded_model.load_weights("model.h5")
 print("Loaded model from disk")
-
+'''
 outcome = model.predict(x_test, batch_size=128)
 for lijst in outcome:
     newlist = [int(round(x)) for x in lijst]
