@@ -2,7 +2,10 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
-from file_reader import *
+import sys
+sys.path.insert(0, './../functions')
+from file_reader import readdata
+from vectorizer import *
 
 # Generate dummy data
 import numpy as np
@@ -15,9 +18,10 @@ x_test = np.random.random((3, 20))
 y_test = keras.utils.to_categorical(np.random.randint(10, size=(3, 1)), num_classes=10)
 y_test = [[ 1,  0,  1,  0,  0,  0,  0,  0,  0,  0],[ 0,  0,  1,  0,  0,  1,  0,  0,  0,  0],[ 0,  1,  0,  0,  0,  0,  0,  0,  0,  0]]
 
-ReadData()
+X, y = readdata('./../data/20180204T0021boards.h5')
 
 print(y_test)
+
 model = Sequential()
 # Dense(64) is a fully-connected layer with 64 hidden units.
 # in the first layer, you must specify the expected input data shape:
