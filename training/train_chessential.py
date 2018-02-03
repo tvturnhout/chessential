@@ -2,6 +2,7 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
+from file_reader import *
 
 # Generate dummy data
 import numpy as np
@@ -57,3 +58,4 @@ outcome = model.predict(x_test, batch_size=128)
 for lijst in outcome:
     newlist = [int(round(x)) for x in lijst]
     print(newlist)
+
