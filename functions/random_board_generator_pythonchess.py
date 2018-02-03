@@ -6,6 +6,7 @@ import random
 board = chess.Board()
 print(board)
 
+#boards can be considered as the input
 boards = []
 i = 0
 while not i > 50 or board.is_game_over() or board.is_insufficient_material() or board.is_stalemate() or board.is_seventyfive_moves():
@@ -18,16 +19,19 @@ while not i > 50 or board.is_game_over() or board.is_insufficient_material() or 
     i = i + 1 
     move = random.choice(potential_moves)
     board.push(move)
+    #use the transformation function before adding it to board
     boards.append(board)
     print(move)
     #print(board)
     print(len(boards))
 
+'''
 outF = open("myOutFile.txt", "w")
 for line in boards:
   outF.write(line)
   outF.write("\n")
 outF.close()
+'''
 
 
 
