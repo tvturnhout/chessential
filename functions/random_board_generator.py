@@ -74,4 +74,4 @@ def start():
 
 # entry point
 if __name__ is '__main__':
-    start()
+    b = generate_board()
