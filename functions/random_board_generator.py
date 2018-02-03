@@ -1,11 +1,11 @@
 from sys import stdout
 import random
- 
- 
+
+
 pieces = ["p","p","p","p","p","p","p","p","k","q","r","r","b","b","n","n",
           "P","P","P","P","P","P","P","P","K","Q","R","R","B","B","N","N"]
- 
- 
+
+
 def check_king(brd, c, r):
     for j in range(-1, 1):
         for i in range(-1, 1):
@@ -16,8 +16,8 @@ def check_king(brd, c, r):
                 if pc == "k" or pc == "K":
                     return 1
     return 0
- 
- 
+
+
 def generate_board():
     for i in range(17):
         n = len(pieces) - 1
@@ -27,7 +27,7 @@ def generate_board():
             pieces[n] = pieces[pt]
             pieces[pt] = tp
             n -= 1
- 
+
     board = [0 for i in range(64)]
     while len(pieces) > 1:
         pc = pieces[0]
@@ -40,10 +40,10 @@ def generate_board():
             if board[c + r * 8] == 0:
                 break
         board[c + r * 8] = pc
- 
+
     return board
- 
- 
+
+
 def start():
     brd = generate_board()
     e = 0
@@ -62,7 +62,7 @@ def start():
         if j < 7:
             stdout.write("/")
     stdout.write(" w - - 0 1\n")
- 
+
     for j in range (8):
         for i in range (8):
             if brd[i + j * 8] == 0:
@@ -70,8 +70,8 @@ def start():
             else:
                 stdout.write(brd[i + j * 8])
         print()
- 
- 
+
+
 # entry point
-start()
- 
+if __name__ is '__main__':
+    start()
