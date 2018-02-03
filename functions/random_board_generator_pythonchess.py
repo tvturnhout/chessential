@@ -1,6 +1,6 @@
 import chess
 import random
-from vectorizer import *
+from vectorizer import Board2Vector
 import numpy as np
 import h5py
 
@@ -17,7 +17,7 @@ while len(boards) < 1000:
         for item in legal_moves:
             potential_moves.append(item)
 
-        i = i + 1 
+        i = i + 1
         move = random.choice(potential_moves)
         board.push(move)
         #use the transformation function before adding it to board
@@ -26,7 +26,7 @@ while len(boards) < 1000:
         #print(move)
         #print(board)
         #print(len(boards))
-        
+
         if len(boards) % 100 == 0:
             print("Added " + str(len(boards)) + " boards to database")
 
@@ -35,7 +35,7 @@ h5f.create_dataset('input_boards', data=boards)
 
 
 '''
-np.savetxt('test.txt', boards , delimiter=",", newline="\n", fmt ="%d") 
+np.savetxt('test.txt', boards , delimiter=",", newline="\n", fmt ="%d")
 
 outF = open("myOutFile.txt", "w")
 for line in boards:
