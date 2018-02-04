@@ -33,7 +33,6 @@ __version__ = '0.1'
 
 import h5py
 import numpy as np
-from vectorizer import vector2string
 
 def readdata(fname):
     h5f = h5py.File(fname, 'r')

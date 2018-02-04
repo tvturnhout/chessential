@@ -4,6 +4,9 @@ from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 import numpy as np
 from keras.models import model_from_json
+import chess
+import sys
+sys.path.insert(0, './../functions')
 
 def predict(X_in):
     # load json and create model

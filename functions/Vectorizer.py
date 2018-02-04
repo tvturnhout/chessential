@@ -49,6 +49,7 @@ def vector2board(Vector):
 #        else:
 #            board_asString +=  '\n' + board_asString2[it]
     return chess.Board(board_asString3)
+    #hallo
 
 def vector2string(Vector):
     board_asString2 = ''
