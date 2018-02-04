@@ -5,7 +5,7 @@ from keras.optimizers import SGD
 import sys
 sys.path.insert(0, './../functions')
 from file_reader import readdata
-from vectorizer import *
+
 
 # Generate dummy data
 import numpy as np
@@ -49,7 +49,7 @@ with open("model.json", "w") as json_file:
 # serialize weights to HDF5
 model.save_weights("model.h5")
 print("Saved model to disk")
- 
+
 
 
 
