@@ -42,6 +42,8 @@ def vector2board(Vector):
     board_asString3 = board_asString3[:-1] + ' w - - 2 1'
 
 #
+
+
 #    board_asString = board_asString2[0]
 #    for it in range(1,len(board_asString2)):
 #        if it % 8>0:
