@@ -1,6 +1,6 @@
 import chess
 import random
-from vectorizer import board2vector
+from vectorize import board2vector
 from call_engine import best_board
 import numpy as np
 import h5py
@@ -12,14 +12,14 @@ Nextboards = []
 
 fname = './../data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
 h5f = h5py.File(fname, 'w')
-dsI = h5f.create_dataset("input_boards", (832,0), maxshape=(832,None), dtype='f', chunks=(832,1000))
-dsO = h5f.create_dataset("output_boards", (832,0), maxshape=(832,None), dtype='f', chunks=(832,1000))
+dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000))
+dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000))
 h5f.close()
 
 
 start = time.time()
 N = 0
-while N < 1e5:
+while N < 1e2:
     board = chess.Board()
 
     i = 0
