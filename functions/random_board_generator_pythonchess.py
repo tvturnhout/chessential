@@ -1,10 +1,11 @@
 import chess
 import random
-from vectorizer import Board2Vector
+from vectorizer import board2vector
 from call_engine import best_board
 import numpy as np
 import h5py
 import datetime
+import time
 
 boards = []
 Nextboards = []
@@ -15,8 +16,10 @@ dsI = h5f.create_dataset("input_boards", (832,0), maxshape=(832,None), dtype='f'
 dsO = h5f.create_dataset("output_boards", (832,0), maxshape=(832,None), dtype='f', chunks=(832,1000))
 h5f.close()
 
+
+start = time.time()
 N = 0
-while N < 2000:
+while N < 1e5:
     board = chess.Board()
 
     i = 0
@@ -34,9 +37,9 @@ while N < 2000:
         move = random.choice(potential_moves)
         board.push(move)
         #use the transformation function before adding it to board
-        boards.append(Board2Vector(board))
+        boards.append(board2vector(board))
 
-        Nextboards.append(Board2Vector(best_board(board,100)))
+        Nextboards.append(board2vector(best_board(board,0.5e3)))
         #print(Board2Vector(board))
         #print(move)
 #        if board.is_game_over():
@@ -72,6 +75,9 @@ while N < 2000:
     boards = []
     Nextboards = []
     print("Added " + str(N) + " boards to database")
+
+end = time.time()
+print('Elapsed time {} sec'.format(end-start))
 #h5f = h5py.File('boards.h5', 'w')
 #h5f.create_dataset('input_boards', data=boards)
 #h5f.create_dataset('output_boards', data=Nextboards)

@@ -16,10 +16,8 @@ X, y = readdata('./../data/20180204T0021boards.h5')
 
 predicted_boards = predict(X)
 
-<<<<<<< HEAD
-print(vector2string(predicted_boards[5]))
-=======
-counter = 0 
+
+counter = 0
 for item in predicted_boards:
     bord, illegal = vector2string(item)
     if illegal:
@@ -27,7 +25,6 @@ for item in predicted_boards:
 
     print(str(counter) + '/' + str(len(predicted_boards)))
 print(str(float(counter)/float(len(predicted_boards))*100) + '%')
->>>>>>> 1e17b53fea5152f05c96baa5014243567557f935
 
 
 
