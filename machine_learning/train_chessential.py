@@ -14,7 +14,7 @@ def third_split_list(a_list):
     return a_list[:third], a_list[third:]
 
 
-X, y = readdata('./../data/20180204T0021boards.h5')
+X, y = readdata('./../data/train_big.h5')
 
 x_train, x_test = third_split_list(X)
 y_train, y_test = third_split_list(y)
@@ -26,9 +26,9 @@ model = Sequential()
 # Dense(64) is a fully-connected layer with 64 hidden units.
 # in the first layer, you must specify the expected input data shape:
 # here, 20-dimensional vectors.
-model.add(Dense(300, activation='relu', input_dim=len(x_train[0])))
+model.add(Dense(1000, activation='relu', input_dim=len(x_train[0])))
 model.add(Dropout(0.5))
-model.add(Dense(300, activation='relu'))
+model.add(Dense(500, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(len(y_train[0]), activation='sigmoid'))
 
@@ -38,7 +38,7 @@ model.compile(loss='binary_crossentropy',
               metrics=['accuracy'])
 
 model.fit(x_train, y_train,
-          epochs=1000,
+          epochs=3000,
           batch_size=128)
 score = model.evaluate(x_test, y_test, batch_size=128)
 

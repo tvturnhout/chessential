@@ -85,13 +85,9 @@ print('Elapsed time {} sec'.format(end-start))
 
 '''
 np.savetxt('test.txt', boards , delimiter=",", newline="\n", fmt ="%d")
-
 outF = open("myOutFile.txt", "w")
 for line in boards:
 outF.write(str(line))
 outF.write("\n")
 outF.close()
 '''
-
-
-
