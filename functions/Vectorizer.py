@@ -53,7 +53,11 @@ def vector2board(Vector):
 def vector2string(Vector):
     board_asString2 = ''
     for it in range(0,len(Vector),len(PossibleEntries)):
-        board_asString2 += PossibleEntries[int(np.where(Vector[it:it + 13])[0])]
+        pieces = np.where(Vector[it:it + 13])[0]
+        if len(pieces) >1:
+            board_asString2 += 'X'
+        else:
+            board_asString2 += PossibleEntries[int(pieces[0])]
     board_asString3 = ''
     r = 0
     for p in board_asString2:
