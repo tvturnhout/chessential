@@ -16,11 +16,15 @@ X, y = readdata('./../data/20180204T0021boards.h5')
 
 predicted_boards = predict(X)
 
-print(predicted_boards[5])
-print(predicted_boards[15])
-print(vector2string(predicted_boards[5]))
+counter = 0 
+for item in predicted_boards:
+    bord, illegal = vector2string(item)
+    if illegal:
+        counter = counter + 1
 
-print(vector2string(predicted_boards[10]))
+    print(str(counter) + '/' + str(len(predicted_boards)))
+print(str(float(counter)/float(len(predicted_boards))*100) + '%')
+
 
 
 
