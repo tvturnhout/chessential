@@ -3,6 +3,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 import numpy as np
+from keras.models import model_from_json
 
 def predict(X):
     # load json and create model
@@ -14,7 +15,7 @@ def predict(X):
     loaded_model.load_weights("weights.h5")
     print("Loaded model from disk")
 
-    outcome = model.predict(x_test, batch_size=128)
+    outcome = loaded_model.predict(x_test, batch_size=128)
 
     parsed_outcome = []
     for lijst in outcome:
