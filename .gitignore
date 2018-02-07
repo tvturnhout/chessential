@@ -102,3 +102,6 @@ ENV/
 
 #Chessential data
 .data
+
+#Stockfish
+.stockfish-9-win
