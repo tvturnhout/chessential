@@ -7,7 +7,7 @@ To be completed
 
 # Requirements
 
-###Python
+### Python
 This project runs on python 3+.
 To get started install the necessary depencencies.
 
@@ -15,7 +15,7 @@ To get started install the necessary depencencies.
 $ pip install -r requirements.txt
 ```
 
-###Stockfish
+### Stockfish
 
 To be completed
 
