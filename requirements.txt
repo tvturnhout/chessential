@@ -1,0 +1,7 @@
+python-chess
+keras
+tensorflow
+tensorboard
+numpy
+h5py
+
