@@ -6,6 +6,7 @@ You can use this repo to build or tweak your own chess AI and to measure its str
 # Requirements
 
 This project runs on python 3+.
+To get started install the necessary depencencies.
 
 ```sh
 $ pip install -r requirements.txt
