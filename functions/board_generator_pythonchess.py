@@ -97,7 +97,7 @@ while N < max_board_length_database:
         elif board.is_seventyfive_moves():
             print('Game ended: Maximum of 75 moves')
         elif i > max_moves:
-            print('Game ended: Maximum of '+str(i)' moves')
+            print('Game ended: Maximum of '+str(i)+' moves')
     
     #Save game data to h5py files
     h5f = h5py.File(fname, 'a')
