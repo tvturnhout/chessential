@@ -109,3 +109,8 @@ ENV/
 .stockfish-9-win
 /stockfish-9-win
 ./stockfish-9-win
+
+#Tensorboard data
+./machine_learning/tensorboard_logs
+/machine_learning/tensorboard_logs
+.machine_learning/tensorboard_logs

@@ -3,6 +3,10 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 import sys
+import time
+import datetime
+from keras.callbacks import TensorBoard
+
 sys.path.insert(0, './../functions')
 from file_reader import readdata
 
@@ -14,7 +18,7 @@ def third_split_list(a_list):
     return a_list[:third], a_list[third:]
 
 
-X, y = readdata('./../data/train_big.h5')
+X, y = readdata('./../data/20180207T2148boards.h5')
 
 x_train, x_test = third_split_list(X)
 y_train, y_test = third_split_list(y)
@@ -37,9 +41,13 @@ model.compile(loss='binary_crossentropy',
               optimizer=sgd,
               metrics=['accuracy'])
 
+tensorboard = TensorBoard(log_dir='./tensorboard_logs/')
+
+
 model.fit(x_train, y_train,
           epochs=3000,
-          batch_size=4000)
+          batch_size=4000,
+          callbacks=[tensorboard])
 score = model.evaluate(x_test, y_test, batch_size=4000)
 
 # serialize model to JSON
@@ -50,3 +58,4 @@ with open("model.json", "w") as json_file:
 model.save_weights("weights.h5")
 print("Saved model to disk")
 
+#tensorboard --logdir=tensorboard_logs/
