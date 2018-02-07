@@ -8,15 +8,13 @@ from file_reader import readdata
 import numpy as np
 from run_chessential import predict
 import random
-from vectorizer import vector2board, vector2string, board2vector
+from vectorize import vector2board, vector2string, board2vector
 from IPython.display import SVG
 import chess
-from telebot import TeleBot
-
-app = TeleBot(__name__)
 
 
-X, y = readdata('./../data/20180204T0021boards.h5')
+
+X, y = readdata('./../data/10k.h5')
 
 predicted_boards = predict(X)
 

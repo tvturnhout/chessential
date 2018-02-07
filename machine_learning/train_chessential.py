@@ -39,8 +39,8 @@ model.compile(loss='binary_crossentropy',
 
 model.fit(x_train, y_train,
           epochs=3000,
-          batch_size=128)
-score = model.evaluate(x_test, y_test, batch_size=128)
+          batch_size=4000)
+score = model.evaluate(x_test, y_test, batch_size=4000)
 
 # serialize model to JSON
 model_json = model.to_json()
