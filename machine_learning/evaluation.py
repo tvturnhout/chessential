@@ -29,6 +29,7 @@ for item in predicted_boards:
 print(str((1-float(legal_counter)/float(len(predicted_boards)))*100) + '%')
 
 
+'''
 #very hacky not ready for production yet
 logic_counter = 0
 i = 0
@@ -64,6 +65,6 @@ for item in X:
     print(str(i) + '/' + str(len(X)))
 
     print(str(float(logic_counter)/float(len(predicted_boards))*100) + '%')  
-
+'''
 
 
