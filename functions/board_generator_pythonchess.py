@@ -30,6 +30,8 @@ continue_database = True
 #Set this parameter to either None, "gzip", "gzip", "lzf", "szip", to compress the data with the given algorithm.
 #Only holds for new data files.
 compression = "gzip"
+#Set this parameter to the numpy datatype the data should be stored as.
+datatype = 'uint16'#'float64'#
 #Set this to True to visualize the first generated game, which consists of an average of 75 moves
 visualise = False
 #Set this to True to log a summary of why a self-played game was ended
@@ -48,8 +50,8 @@ if continue_database and list_of_files:
 else:
     fname = './../data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
     h5f = h5py.File(fname, 'w')
-    dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression=compression)
-    dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression=compression)
+    dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype=datatype, chunks=(792,1000), compression=compression)
+    dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype=datatype, chunks=(792,1000), compression=compression)
 
     h5f.close()
 
