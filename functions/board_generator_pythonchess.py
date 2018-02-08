@@ -26,7 +26,10 @@ It is recommended to keep this value between 5 and 15 to keep a high quality gam
 '''
 
 #Set this value to True to continue adding to the newest generated database. Set to False to start a new one
-continue_database = True
+continue_database = False
+#Set this parameter to either None, "gzip", "gzip", "lzf", "szip", to compress the data with the given algorithm.
+#Only holds for new data files.
+compression = "gzip"
 #Set this to True to visualize the first generated game, which consists of an average of 75 moves
 visualise = False
 #Set this to True to log a summary of why a self-played game was ended
@@ -36,7 +39,7 @@ log_info = True
 max_moves = 500
 
 #Set this value to limit the total boards added to database.
-max_board_length_database = 1e8
+max_board_length_database = 2e3
 
 #Configure database
 list_of_files = glob.glob('./../data/*.h5')
@@ -45,8 +48,8 @@ if continue_database and list_of_files:
 else:
     fname = './../data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
     h5f = h5py.File(fname, 'w')
-    dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression="gzip")
-    dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression="gzip")
+    dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression=compression)
+    dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype='f', chunks=(792,1000), compression=compression)
 
     h5f.close()
 
@@ -58,6 +61,7 @@ N = 0
 
 while N < max_board_length_database:
     board = chess.Board()
+    boards.append(board2vector(board))
 
     i = 0
     while not i > max_moves \
@@ -70,9 +74,15 @@ while N < max_board_length_database:
 
         i = i + 1
         #use the transformation function before adding it to board
-        nextboard = board2vector(best_board(board,search_depth=random.randint(6,12)))
-        nextboards.append(nextboard)
-        boards.append(nextboard)
+        boardvec = board2vector(best_board(board,search_depth=random.randint(6,12)))
+        nextboards.append(boardvec)
+        if not i > max_moves \
+            and not board.is_game_over() \
+            and not board.is_insufficient_material() \
+            and not board.is_stalemate() \
+            and not board.is_fivefold_repetition() \
+            and not board.is_seventyfive_moves():
+                boards.append(boardvec)
 
 
         if N == 0 and visualise:
