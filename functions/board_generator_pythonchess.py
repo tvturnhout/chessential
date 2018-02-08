@@ -70,7 +70,7 @@ while N < max_board_length_database:
 
         i = i + 1
         #use the transformation function before adding it to board
-        nextboard = board2vector(best_board(board,search_depth=random.randint(8,13)))
+        nextboard = board2vector(best_board(board,search_depth=random.randint(6,12)))
         nextboards.append(nextboard)
         boards.append(nextboard)
 

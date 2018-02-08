@@ -18,7 +18,7 @@ def third_split_list(a_list):
     return a_list[:third], a_list[third:]
 
 
-X, y = readdata('./../data/20180207T2148boards.h5')
+X, y = readdata('./../data/5M.h5')
 
 x_train, x_test = third_split_list(X)
 y_train, y_test = third_split_list(y)
@@ -31,6 +31,8 @@ model = Sequential()
 # in the first layer, you must specify the expected input data shape:
 # here, 20-dimensional vectors.
 model.add(Dense(1000, activation='relu', input_dim=len(x_train[0])))
+model.add(Dropout(0.5))
+model.add(Dense(750, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(500, activation='relu'))
 model.add(Dropout(0.5))
@@ -45,10 +47,10 @@ tensorboard = TensorBoard(log_dir='./tensorboard_logs/')
 
 
 model.fit(x_train, y_train,
-          epochs=3000,
-          batch_size=4000,
+          epochs=4000,
+          batch_size=10000,
           callbacks=[tensorboard])
-score = model.evaluate(x_test, y_test, batch_size=4000)
+score = model.evaluate(x_test, y_test, batch_size=1000)
 
 # serialize model to JSON
 model_json = model.to_json()
