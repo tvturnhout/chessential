@@ -26,7 +26,7 @@ It is recommended to keep this value between 5 and 15 to keep a high quality gam
 '''
 
 #Set this value to True to continue adding to the newest generated database. Set to False to start a new one
-continue_database = False
+continue_database = True
 #Set this parameter to either None, "gzip", "gzip", "lzf", "szip", to compress the data with the given algorithm.
 #Only holds for new data files.
 compression = "gzip"
@@ -39,7 +39,7 @@ log_info = True
 max_moves = 500
 
 #Set this value to limit the total boards added to database.
-max_board_length_database = 2e3
+max_board_length_database = 1e8
 
 #Configure database
 list_of_files = glob.glob('./../data/*.h5')

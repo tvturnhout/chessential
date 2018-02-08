@@ -14,7 +14,7 @@ import chess
 
 
 
-X, y = readdata('./../data/10k.h5')
+X, y = readdata('./../data/20180208T2251boards.h5')
 
 predicted_boards = predict(X)
 
@@ -52,7 +52,7 @@ for item in X:
     temp_list2 = []
     for listitem in temp_list1[i]:
         temp_list2.append(int(listitem))
-   
+
 
     for board_check in logical_boards:
         temp_list3 = []
@@ -60,11 +60,11 @@ for item in X:
             temp_list3.append(int(listitem))
         if temp_list2 == temp_list3:
             logic_counter = logic_counter + 1
- 
+
     i = i + 1
     print(str(i) + '/' + str(len(X)))
 
-    print(str(float(logic_counter)/float(len(predicted_boards))*100) + '%')  
+    print(str(float(logic_counter)/float(len(predicted_boards))*100) + '%')
 '''
 
 
