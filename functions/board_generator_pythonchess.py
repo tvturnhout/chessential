@@ -134,7 +134,7 @@ while N < max_board_length_database:
     total_time = round((end-start)/len(boards)*1000)
     boards = []
     nextboards = []
-    
+
     print('This took {} ms/board'.format(total_time))
     print("Database now contains " + str(N) + " boards")
 
