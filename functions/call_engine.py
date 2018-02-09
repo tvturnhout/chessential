@@ -15,5 +15,3 @@ def best_board(input_board,search_depth):
 if __name__ is '__main__':
     board = chess.Board()
     next_board = best_board(board,depth=6)
-
-

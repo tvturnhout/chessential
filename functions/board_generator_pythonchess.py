@@ -8,6 +8,7 @@ import datetime
 import time
 import glob
 import os
+import gc
 
 
 '''
@@ -25,7 +26,7 @@ Stockfish is not deterministic and randomness can also be expected due to factor
 However, to ensure that games have a big variety when generating large datasets, the engine is called with a random search depth, which adds randomness to the games.
 It is recommended to keep this value between 5 and 15 to keep a high quality games while keeping decent calculating times on a PC.
 '''
-
+#gc.set_debug(gc.DEBUG_LEAK)
 #Set this value to True to continue adding to the newest generated database. Set to False to start a new one
 continue_database = True
 #Set this parameter to either None, "gzip", "gzip", "lzf", "szip", to compress the data with the given algorithm.
@@ -51,8 +52,18 @@ if continue_database and list_of_files:
 else:
     fname = './../data/' + datetime.datetime.now().strftime('%Y%m%dT%H%M') + 'boards.h5'
     h5f = h5py.File(fname, 'w')
-    dsI = h5f.create_dataset("input_boards", (792,0), maxshape=(792,None), dtype=datatype, chunks=(792,1000), compression=compression)
-    dsO = h5f.create_dataset("output_boards", (792,0), maxshape=(792,None), dtype=datatype, chunks=(792,1000), compression=compression)
+    dsI = h5f.create_dataset("input_boards",
+                             (792,0),
+                             maxshape=(792,None),
+                             dtype=datatype,
+                             chunks=(792,1000),
+                             compression=compression)
+    dsO = h5f.create_dataset("output_boards",
+                             (792,0),
+                             maxshape=(792,None),
+                             dtype=datatype,
+                             chunks=(792,1000),
+                             compression=compression)
 
     h5f.close()
 
@@ -114,6 +125,12 @@ while N < max_board_length_database:
         elif i > max_moves:
             print('Game ended: Maximum of '+str(i)+' moves')
 
+    n = gc.collect()
+    print('Unreachable objects: {}'.format(n))
+#    del gc.garbage[:]
+#    n = gc.collect()
+#    print('Unreachable objects: {}'.format(n))
+
     #Save game data to h5py files
     h5f = h5py.File(fname, 'a')
 
@@ -130,8 +147,13 @@ while N < max_board_length_database:
 
     N = dsetIn.shape[1]
     h5f.close()
+    del dsetIn
+    del dsetOut
+    del h5f
     end = time.time()
     total_time = round((end-start)/len(boards)*1000)
+    del boards
+    del nextboards
     boards = []
     nextboards = []
 
