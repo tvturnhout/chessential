@@ -63,6 +63,25 @@ def legal_move(board_in,board_out):
 
 
 def play_against_nn():
+    """
+    Name:
+        play_against_nn
+    Description:
+        This method can be started to test a the neural net model in an
+        interactive way in the console. The board will be displayed each time,
+        listing the moves from which you can choose. After your move, the
+        model will get its turn.
+    Input:
+        None
+    Output:
+        None
+    Comment:
+        At this point this function does not check the legality of the moves of
+        the model. This can easily be added later on. This will also give the
+        opportunity to use the detected legal move to be pushed to the board,
+        imposing the this move also to be indicated in yellow, as is done with
+        th operator moves.
+    """
     board = chess.Board()
     while not board.is_game_over() \
             and not board.is_insufficient_material() \
