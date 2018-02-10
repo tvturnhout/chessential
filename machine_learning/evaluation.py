@@ -11,6 +11,7 @@ import random
 from vectorize import vector2board, vector2string, board2vector
 from IPython.display import SVG, display
 import chess
+import chess.svg
 import time
 
 
@@ -90,6 +91,7 @@ def play_against_nn():
             and not board.is_seventyfive_moves():
         print('Board before your move:\n'+22*'-')
         display(board)
+        SVG(chess.svg.board(board=board))  
         i = 0
         moves = []
         for move in board.legal_moves:
