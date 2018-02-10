@@ -6,6 +6,7 @@ import sys
 import time
 import datetime
 from keras.callbacks import TensorBoard
+import numpy as np
 
 sys.path.insert(0, './../functions')
 from file_reader import readdata
@@ -15,10 +16,10 @@ import numpy as np
 
 def third_split_list(a_list):
     third = int(len(a_list)/3)
-    return a_list[:third], a_list[third:]
+    return  a_list[:third].astype('float16'),a_list[third:].astype('float16')
 
 
-X, y = readdata('./../data/5M.h5')
+X, y = readdata('./../data/20180209T0010boards.h5')
 
 x_train, x_test = third_split_list(X)
 y_train, y_test = third_split_list(y)
@@ -47,10 +48,10 @@ tensorboard = TensorBoard(log_dir='./tensorboard_logs/')
 
 
 model.fit(x_train, y_train,
-          epochs=4000,
-          batch_size=10000,
+          epochs=50,
+          batch_size=128,
           callbacks=[tensorboard])
-score = model.evaluate(x_test, y_test, batch_size=1000)
+score = model.evaluate(x_test, y_test, batch_size=128)
 
 # serialize model to JSON
 model_json = model.to_json()

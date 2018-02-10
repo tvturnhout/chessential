@@ -18,7 +18,7 @@ def predict(X_in):
     loaded_model.load_weights("weights.h5")
     print("Loaded model from disk")
 
-    outcome = loaded_model.predict(X_in, batch_size=128)
+    outcome = loaded_model.predict(X_in.astype(float), batch_size=128)
 
     parsed_outcome = []
     for lijst in outcome:
