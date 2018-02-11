@@ -13,6 +13,8 @@ from IPython.display import SVG, display
 import chess
 import chess.svg
 import time
+import os
+
 
 
 def legal_move(board_in,board_out):
