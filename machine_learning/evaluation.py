@@ -91,7 +91,7 @@ def play_against_nn():
             and not board.is_seventyfive_moves():
         print('Board before your move:\n'+22*'-')
         display(board)
-        SVG(chess.svg.board(board=board))  
+        SVG(chess.svg.board(board=board))
         i = 0
         moves = []
         for move in board.legal_moves:
@@ -113,62 +113,62 @@ def play_against_nn():
         board = vector2board(predict(  np.array([board2vector(board),],dtype='float64')  )[0] )
 
 
-
-check_data_file = True
-check_start_moves = True
-play = True
-
-
-"""
-Check predictions on dataset
-"""
-if check_data_file:
-    debug_illegal_predictions = False
-    print_moves = False
-
-    X, y = readdata('./../data/20180210T1556boards.h5')
-
-    predicted_boards = predict(X)
-
-    start = time.time()
-    legal_counter = 0
-    for i in range(len(predicted_boards)):
-        board_pred = predicted_boards[i]
-        board_in = X[i]
-        move = legal_move(board_in,board_pred)
-        if print_moves:
-            print('Legal move: {}'.format(move))
-        if move is None and debug_illegal_predictions:
-            print('Board in:\n-------------------')
-            display(vector2board(board_in))
-            print('Board predicted:\n-------------------')
-            display(vector2board(board_pred))
-            ans = input("Press Enter to continue, 'quit' to stop debugging...")
-            if ans == 'quit':
-                debug_illegal_predictions = False
-        elif not move is None:
-            legal_counter = legal_counter + 1
-    end = time.time()
-    print('Verification time per move: {0:0.5f}sec'.format((end-start)/len(predicted_boards)))
-    print('Percentage of legal moves: {}%'.format(float(legal_counter)/float(len(predicted_boards))*100))
+if __name__ is '__main__':
+    check_data_file = False
+    check_start_moves = True
+    play = True
 
 
-"""
-Check if all legal moves can be detected from all legal outcomes of start
-situation.
-"""
-if check_start_moves:
-    print('Legal moves detected from all legal outcomes of start situation:')
-    board = chess.Board()
-    potential_moves = []
-    potential_outcomes = []
-    for move in board.legal_moves:
-        potential_moves.append(move)
-        b = board.copy()
-        b.push(move)
-        potential_outcomes.append(b)
-    moves = [legal_move(board,potential_outcomes[i]) for i in range(len(potential_outcomes)) ]
-    print(moves)
+    """
+    Check predictions on dataset
+    """
+    if check_data_file:
+        debug_illegal_predictions = False
+        print_moves = False
 
-if play:
-    play_against_nn()
+        X, y = readdata('./../data/20180210T1556boards.h5')
+
+        predicted_boards = predict(X)
+
+        start = time.time()
+        legal_counter = 0
+        for i in range(len(predicted_boards)):
+            board_pred = predicted_boards[i]
+            board_in = X[i]
+            move = legal_move(board_in,board_pred)
+            if print_moves:
+                print('Legal move: {}'.format(move))
+            if move is None and debug_illegal_predictions:
+                print('Board in:\n-------------------')
+                display(vector2board(board_in))
+                print('Board predicted:\n-------------------')
+                display(vector2board(board_pred))
+                ans = input("Press Enter to continue, 'quit' to stop debugging...")
+                if ans == 'quit':
+                    debug_illegal_predictions = False
+            elif not move is None:
+                legal_counter = legal_counter + 1
+        end = time.time()
+        print('Verification time per move: {0:0.5f}sec'.format((end-start)/len(predicted_boards)))
+        print('Percentage of legal moves: {}%'.format(float(legal_counter)/float(len(predicted_boards))*100))
+
+
+    """
+    Check if all legal moves can be detected from all legal outcomes of start
+    situation.
+    """
+    if check_start_moves:
+        print('Legal moves detected from all legal outcomes of start situation:')
+        board = chess.Board()
+        potential_moves = []
+        potential_outcomes = []
+        for move in board.legal_moves:
+            potential_moves.append(move)
+            b = board.copy()
+            b.push(move)
+            potential_outcomes.append(b)
+        moves = [legal_move(board,potential_outcomes[i]) for i in range(len(potential_outcomes)) ]
+        print(moves)
+
+    if play:
+        play_against_nn()
