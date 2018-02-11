@@ -43,7 +43,7 @@ log_info = True
 max_moves = 500
 
 #Set this value to limit the total boards added to database.
-max_board_length_database = 10000#1e8
+max_board_length_database = 1e8
 
 #Configure database
 list_of_files = glob.glob('./../data/*.h5')

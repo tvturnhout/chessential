@@ -48,7 +48,7 @@ tensorboard = TensorBoard(log_dir='./tensorboard_logs/')
 
 
 model.fit(x_train, y_train,
-          epochs=50,
+          epochs=1000,
           batch_size=128,
           callbacks=[tensorboard])
 score = model.evaluate(x_test, y_test, batch_size=128)
