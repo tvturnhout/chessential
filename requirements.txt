@@ -5,3 +5,4 @@ tensorboard
 numpy
 h5py
 
+scikit-learn
