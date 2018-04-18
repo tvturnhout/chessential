@@ -5,10 +5,6 @@ from keras.optimizers import SGD
 import sys
 sys.path.insert(0, './../functions')
 from file_reader import readdata
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ea53556ef885fa3dd8472cd958a82fce9b60532
 
 # Generate dummy data
 import numpy as np
