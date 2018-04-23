@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, './../functions')
 
 def predict(X_in):
-    # load json and create model
+    # load model.json and create model
     json_file = open('model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
